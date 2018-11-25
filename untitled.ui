@@ -1,0 +1,468 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>721</width>
+    <height>576</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0">
+     <widget class="QTabWidget" name="tabWidget">
+      <property name="currentIndex">
+       <number>6</number>
+      </property>
+      <widget class="QWidget" name="cars">
+       <attribute name="title">
+        <string>Cars</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_2">
+        <item row="0" column="0">
+         <widget class="QTableWidget" name="tblCars">
+          <column>
+           <property name="text">
+            <string>Car ID</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Model</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Plug type</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Colour</string>
+           </property>
+          </column>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="customers">
+       <attribute name="title">
+        <string>Customers</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_3">
+        <item row="0" column="0">
+         <widget class="QTableWidget" name="tableWidget">
+          <column>
+           <property name="text">
+            <string>Username</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Email</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Phone number</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Full name</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Location of residence</string>
+           </property>
+          </column>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="order">
+       <attribute name="title">
+        <string>Orders</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_4">
+        <item row="0" column="0">
+         <widget class="QTableWidget" name="tableWidget_2">
+          <column>
+           <property name="text">
+            <string>Username</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Car ID</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>From</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>To</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Date &amp; time</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Duration</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Distance</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Status</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Price</string>
+           </property>
+          </column>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="payment">
+       <attribute name="title">
+        <string>Payment</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_5">
+        <item row="0" column="0">
+         <widget class="QTableWidget" name="tableWidget_3">
+          <column>
+           <property name="text">
+            <string>Date &amp; time of order</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Date and time of payment</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Amount</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Username</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Car ID</string>
+           </property>
+          </column>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="workshops">
+       <attribute name="title">
+        <string>Workshops</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_6">
+        <item row="0" column="0">
+         <widget class="QTableWidget" name="tableWidget_4">
+          <column>
+           <property name="text">
+            <string>WID</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>GPD location</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Available time</string>
+           </property>
+          </column>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="avParts">
+       <attribute name="title">
+        <string>Parts in workshops</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_7">
+        <item row="0" column="0">
+         <widget class="QTableWidget" name="tableWidget_5">
+          <column>
+           <property name="text">
+            <string>WID</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Name of part</string>
+           </property>
+          </column>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="partProv">
+       <attribute name="title">
+        <string>Car parts providers</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_8">
+        <item row="0" column="0">
+         <widget class="QTableWidget" name="tableWidget_6">
+          <column>
+           <property name="text">
+            <string>ID</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Address</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Name</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Phone number</string>
+           </property>
+          </column>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="canProvide">
+       <attribute name="title">
+        <string>Details</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_9">
+        <item row="0" column="0">
+         <widget class="QTableWidget" name="tableWidget_7">
+          <column>
+           <property name="text">
+            <string>ID</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Name of part</string>
+           </property>
+          </column>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="repair">
+       <attribute name="title">
+        <string>Repairs</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_10">
+        <item row="0" column="0">
+         <widget class="QTableWidget" name="tableWidget_8">
+          <column>
+           <property name="text">
+            <string>Car ID</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>WID</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Date &amp; time</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Status</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Price</string>
+           </property>
+          </column>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="chargStat">
+       <attribute name="title">
+        <string>Charging stations</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_11">
+        <item row="0" column="0">
+         <widget class="QTableWidget" name="tableWidget_9">
+          <column>
+           <property name="text">
+            <string>UID</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Sockets</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Charging cost</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>GPS location</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Charging time</string>
+           </property>
+          </column>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="charges">
+       <attribute name="title">
+        <string>Charges</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_12">
+        <item row="0" column="0">
+         <widget class="QTableWidget" name="tableWidget_10">
+          <column>
+           <property name="text">
+            <string>New Column</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Car ID</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>UID</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Charging time</string>
+           </property>
+          </column>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="query">
+       <attribute name="title">
+        <string>Queries</string>
+       </attribute>
+       <layout class="QHBoxLayout" name="horizontalLayout">
+        <item>
+         <widget class="QPushButton" name="pushButton">
+          <property name="text">
+           <string>Query 1</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushButton_2">
+          <property name="text">
+           <string>Query 2</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushButton_3">
+          <property name="text">
+           <string>Query 3</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushButton_4">
+          <property name="text">
+           <string>Query 4</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushButton_5">
+          <property name="text">
+           <string>Query 5</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushButton_6">
+          <property name="text">
+           <string>Query 6</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushButton_7">
+          <property name="text">
+           <string>Query 7</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushButton_8">
+          <property name="text">
+           <string>Query 8</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushButton_9">
+          <property name="text">
+           <string>Query 9</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushButton_10">
+          <property name="text">
+           <string>Query 10</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
