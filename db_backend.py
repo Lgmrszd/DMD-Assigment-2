@@ -38,8 +38,13 @@ def workshops_select():
     return _selection(sql_statement)
 
 
-def can_provide_select():
+def parts_in_workshop_select():
     sql_statement = "select AP.WID, AP.NAME from AVAILABLE_PARTS AP;"
+    return _selection(sql_statement)
+
+
+def can_provide_select():
+    sql_statement = "select CP.ID, CP.NAME from CAN_PROVIDE CP;"
     return _selection(sql_statement)
 
 
