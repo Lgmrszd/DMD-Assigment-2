@@ -18,7 +18,7 @@
     <item row="0" column="0">
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>6</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="cars">
        <attribute name="title">
@@ -57,7 +57,7 @@
        </attribute>
        <layout class="QGridLayout" name="gridLayout_3">
         <item row="0" column="0">
-         <widget class="QTableWidget" name="tableWidget">
+         <widget class="QTableWidget" name="tblCustomers">
           <column>
            <property name="text">
             <string>Username</string>
@@ -80,7 +80,17 @@
           </column>
           <column>
            <property name="text">
-            <string>Location of residence</string>
+            <string>Country</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>City</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Zip code</string>
            </property>
           </column>
          </widget>
@@ -93,7 +103,7 @@
        </attribute>
        <layout class="QGridLayout" name="gridLayout_4">
         <item row="0" column="0">
-         <widget class="QTableWidget" name="tableWidget_2">
+         <widget class="QTableWidget" name="tblOrders">
           <column>
            <property name="text">
             <string>Username</string>
@@ -149,7 +159,7 @@
        </attribute>
        <layout class="QGridLayout" name="gridLayout_5">
         <item row="0" column="0">
-         <widget class="QTableWidget" name="tableWidget_3">
+         <widget class="QTableWidget" name="tblPayment">
           <column>
            <property name="text">
             <string>Date &amp; time of order</string>
@@ -185,7 +195,7 @@
        </attribute>
        <layout class="QGridLayout" name="gridLayout_6">
         <item row="0" column="0">
-         <widget class="QTableWidget" name="tableWidget_4">
+         <widget class="QTableWidget" name="tblWorkshop">
           <column>
            <property name="text">
             <string>WID</string>
@@ -211,7 +221,7 @@
        </attribute>
        <layout class="QGridLayout" name="gridLayout_7">
         <item row="0" column="0">
-         <widget class="QTableWidget" name="tableWidget_5">
+         <widget class="QTableWidget" name="tblParts">
           <column>
            <property name="text">
             <string>WID</string>
@@ -232,7 +242,7 @@
        </attribute>
        <layout class="QGridLayout" name="gridLayout_8">
         <item row="0" column="0">
-         <widget class="QTableWidget" name="tableWidget_6">
+         <widget class="QTableWidget" name="tblProviders">
           <column>
            <property name="text">
             <string>ID</string>
@@ -263,7 +273,7 @@
        </attribute>
        <layout class="QGridLayout" name="gridLayout_9">
         <item row="0" column="0">
-         <widget class="QTableWidget" name="tableWidget_7">
+         <widget class="QTableWidget" name="tblDetails">
           <column>
            <property name="text">
             <string>ID</string>
@@ -284,7 +294,7 @@
        </attribute>
        <layout class="QGridLayout" name="gridLayout_10">
         <item row="0" column="0">
-         <widget class="QTableWidget" name="tableWidget_8">
+         <widget class="QTableWidget" name="tblRepairs">
           <column>
            <property name="text">
             <string>Car ID</string>
@@ -320,7 +330,7 @@
        </attribute>
        <layout class="QGridLayout" name="gridLayout_11">
         <item row="0" column="0">
-         <widget class="QTableWidget" name="tableWidget_9">
+         <widget class="QTableWidget" name="tblChargSt">
           <column>
            <property name="text">
             <string>UID</string>
@@ -356,12 +366,7 @@
        </attribute>
        <layout class="QGridLayout" name="gridLayout_12">
         <item row="0" column="0">
-         <widget class="QTableWidget" name="tableWidget_10">
-          <column>
-           <property name="text">
-            <string>New Column</string>
-           </property>
-          </column>
+         <widget class="QTableWidget" name="tblCharges">
           <column>
            <property name="text">
             <string>Car ID</string>
@@ -370,6 +375,11 @@
           <column>
            <property name="text">
             <string>UID</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Date &amp; time</string>
            </property>
           </column>
           <column>
