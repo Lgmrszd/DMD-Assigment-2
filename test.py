@@ -8,10 +8,7 @@ db_backend.create_tables()
 
 # t1 = dbtypes.Test(conn, {"name": "AAAA"})
 # print(t1.name)
-cp = dbtypes.PartsProviders(conn, {"NAME": "FSD", "PHONE": "FSD", "ADDRESS": "dadas"})
+cp = dbtypes.PartsProviders({"NAME": "FSD", "PHONE": "FSD", "ADRESS": "dadas"})
 cp.insert()
 
-# cur = conn.cursor()
-# cur.execute("INSERT INTO CAR_PARTS VALUES (?)", "A")
-# cur.close()
-# conn.commit()
+print(dbtypes.parts_providers_select())
