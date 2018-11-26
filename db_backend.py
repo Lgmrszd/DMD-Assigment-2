@@ -11,7 +11,7 @@ def create_tables():
 
 
 def clear_tables():
-    tables = ['PAYMENTS', 'CHARGES', 'ORDERS', 'REPAIRS', 'AVAILABLE_PARTS', 'PARTS_FOR', 'SOCKETS',
+    tables = ['PAYMENT', 'CHARGES', 'ORDERS', 'REPAIRS', 'AVAILABLE_PARTS', 'PARTS_FOR', 'SOCKETS',
               'CHARGING_STATIONS', 'CUSTOMERS', 'CARS', 'CAR_TYPES', 'WORKSHOPS', 'CAR_PARTS', 'PARTS_PROVIDERS']
     cur = conn.cursor()
     for table in tables:
