@@ -1,4 +1,5 @@
 from dbcore import conn
+import test_data
 
 with open("creation.sql", "r") as f:
     creation_sql = f.read()
@@ -15,6 +16,22 @@ def _selection(sql_statement):
     result = cur.fetchall()
     cur.close()
     return result
+
+
+def _insertion(sql_statement, data):
+    cur = conn.cursor()
+    if isinstance(data, list):
+        cur.executemany(sql_statement, data)
+    else:
+        cur.execute(sql_statement, data)
+    conn.commit()
+    cur.close()
+
+
+def create_test_data():
+    sql_statement = "INSERT INTO CARS(CAR_ID, COLOR, MODEL) VALUES (?, ?, ?)"
+    cars = [test_data.random_car() for i in range(20)]
+    _insertion(sql_statement, cars)
 
 
 def cars_select():
@@ -64,7 +81,7 @@ def charging_stations_select():
 
 
 def charges_select():
-    sql_statement = "select CH.CAR_ID, CH.UID, CH.DATETIME, CH.CHARGING_TIME from CHARGES CH;"
+    sql_statement = "select CH.CAR_ID, CH.UID, CH.DATETIME, CH.CHARGING_TIME, CH.COST    from CHARGES CH;"
     return _selection(sql_statement)
 
 
@@ -80,3 +97,6 @@ def payment_select():
 
 def init():
     create_tables()
+
+def query1():
+    pass
