@@ -93,6 +93,21 @@ def create_test_data():
     repairs = test_data.repairs()
     _insertion(sql_statement, repairs)
 
+    orders, payments = test_data.orders_payments(cars)
+    sql_statement = "INSERT INTO `ORDERS` " \
+                    "(USERNAME,CAR_ID,DATETIME,FROM_,TO_,STATUS,PRICE,TRAVELED_TO_CLIENT,DURATION) " \
+                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);"
+    _insertion(sql_statement, orders)
+    sql_statement = "INSERT INTO `PAYMENT` (USERNAME,CAR_ID,ORDER_DATETIME,PAYMENT_DATETIME,AMOUNT) " \
+                    "VALUES (?, ?, ?, ?, ?);"
+    _insertion(sql_statement, payments)
+
+    sql_statement = "INSERT INTO `CHARGES` (UID,CAR_ID,DATETIME,STATUS,CHARGING_TIME,COST) " \
+                    "VALUES (?, ?, ?, ?, ?, ?);"
+    charges = test_data.charges(cars)
+    _insertion(sql_statement, charges)
+
+
 def cars_select():
     sql_statement = "select C.CAR_ID, C.MODEL, T.PLUG_TYPE, C.COLOR from CARS C, CAR_TYPES T where C.MODEL = T.MODEL;"
     return _selection(sql_statement)

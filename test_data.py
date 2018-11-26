@@ -3,6 +3,7 @@ import datetime
 
 __ch_count = 12
 __plate_formats = [(("L", 4), ("-",), ("d", 3)), (("L", 3), ("-",), ("d", 4))]
+__locations = ["shops", "west square", "east square", "north square", "tavern", "medical center"]
 __colors = ["Red", "Green", "Blue", "Magenta", "Yellow", "Silver", "Gray", "White", "Black"]
 __models = [("Toyota Prius", "Type 1"), ("Tesla Model S", "Tesla Supercharger"),
             ("Tesla Model 3", "Tesla Supercharger"), ("KAMAZ", "GOST 23784"), ("Waymo", "Type 2"), ("ICar", "Lighting"),
@@ -69,7 +70,7 @@ def sockets():
 def repairs():
     today = datetime.datetime.today()
     repairs_list = []
-    for i in range(6):
+    for i in range(5):
         wid = random.randint(1, 3)
         car_id = random.randint(1, 18)
         date_time = today - datetime.timedelta(days=random.randint(1, 10),
@@ -80,11 +81,91 @@ def repairs():
     return repairs_list
 
 
-def charges_payments():
-    charges_list = []
+def orders_payments(cars_tuples):
+    today = datetime.datetime.today()
+    orders_list = []
     payments_list = []
 
-    return charges_list, payments_list
+    for i in range(5):
+        username = random.choice(__customers)[0]
+        car_id = cars_tuples[random.randint(1, 18) - 1][0]
+        date_time = today - datetime.timedelta(days=random.randint(1, 10),
+                                               hours=random.randint(0, 23),
+                                               minutes=random.randint(0, 59))
+        _from = random.choice(__locations)
+        _to = random.choice(__locations)
+        while _from == _to:
+            _to = random.choice(__locations)
+        price = 100*random.randint(1, 7)
+        tr2c = random.randint(500, 2000)
+        duration = "{:02}:{:02}".format(random.randint(0, 1), random.randint(0, 59))
+
+        order = (username, car_id, date_time.strftime("%Y-%m-%d %H:%M"), _from, _to, "Done", price, tr2c, duration)
+        orders_list.append(order)
+
+        p_dt = date_time + datetime.timedelta(minutes=random.randint(0, 10))
+        payment = (username, car_id, date_time.strftime("%Y-%m-%d %H:%M"), p_dt.strftime("%Y-%m-%d %H:%M"), price)
+        payments_list.append(payment)
+
+    false_order = list(orders_list[-1])
+    false_payment = list(payments_list[-1])
+    false_order[6] = 25000
+    false_payment[4] = 500000
+    orders_list[-1] = tuple(false_order)
+    payments_list[-1] = tuple(false_payment)
+
+    for i in range(5):
+        username = random.choice(__customers)[0]
+        car_id = cars_tuples[random.randint(1, 18) - 1][0]
+        date_time = today - datetime.timedelta(weeks=15,
+                                               days=random.randint(1, 10),
+                                               hours=random.randint(0, 23),
+                                               minutes=random.randint(0, 59))
+        _from = random.choice(__locations)
+        _to = random.choice(__locations)
+        while _from == _to:
+            _to = random.choice(__locations)
+        price = 100*random.randint(1, 7)
+        tr2c = random.randint(500, 2000)
+        duration = "{:02}:{:02}".format(random.randint(0, 1), random.randint(0, 59))
+
+        order = (username, car_id, date_time.strftime("%Y-%m-%d %H:%M"), _from, _to, "Done", price, tr2c, duration)
+        orders_list.append(order)
+
+        p_dt = date_time + datetime.timedelta(minutes=random.randint(0, 10))
+        payment = (username, car_id, date_time.strftime("%Y-%m-%d %H:%M"), p_dt.strftime("%Y-%m-%d %H:%M"), price)
+        payments_list.append(payment)
+
+    return orders_list, payments_list
+
+
+def charges(cars_tuples):
+    today = datetime.datetime.today()
+    charges_list = []
+    for i in range(10):
+        uid = random.randint(1, __ch_count)
+        car_id = cars_tuples[random.randint(1, 18) - 1][0]
+        date_time = today - datetime.timedelta(days=random.randint(1, 10),
+                                               hours=random.randint(0, 23),
+                                               minutes=random.randint(0, 59))
+        charging_time = "{:02}:{:02}".format(random.randint(0, 1), random.randint(0, 59))
+        cost = 100*random.randint(1, 5)
+        charge = (uid, car_id, date_time, "Done", charging_time, cost)
+        charges_list.append(charge)
+
+    # greedy car
+    car_id = cars_tuples[random.randint(1, 18) - 1][0]
+    for i in range(5):
+        uid = random.randint(1, __ch_count)
+        date_time = today - datetime.timedelta(days=random.randint(1, 4),
+                                               hours=random.randint(0, 23),
+                                               minutes=random.randint(0, 59))
+        charging_time = "{:02}:{:02}".format(random.randint(0, 1), random.randint(0, 59))
+        cost = 100*random.randint(1, 5)
+        charge = (uid, car_id, date_time, "Done", charging_time, cost)
+        charges_list.append(charge)
+
+    return charges_list
 
 
 def parts():
