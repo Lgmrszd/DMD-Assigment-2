@@ -35,19 +35,6 @@ class ExampleApp(QtWidgets.QMainWindow, gui.Ui_MainWindow):
         self.init_repairs()
         self.init_charging_station()
         self.init_charges()
-        self.tblChargSt.resizeColumnsToContents()
-        self.tblCars.resizeColumnsToContents()
-        self.tblCustomers.resizeColumnsToContents()
-        self.tblOrders.resizeColumnsToContents()
-        self.tblPayment.resizeColumnsToContents()
-        self.tblWorkshop.resizeColumnsToContents()
-        self.tblParts.resizeColumnsToContents()
-        self.tblProviders.resizeColumnsToContents()
-        self.tblDetails.resizeColumnsToContents()
-        self.tblRepairs.resizeColumnsToContents()
-        self.tblChargSt.resizeColumnsToContents()
-        self.tblChargSt.resizeRowsToContents()
-        self.tblCharges.resizeColumnsToContents()
         self.btnQ1.clicked.connect(self.show_query_1)
         self.btnQ2.clicked.connect(self.show_query_2)
         self.btnQ3.clicked.connect(self.show_query_3)
@@ -105,6 +92,7 @@ class ExampleApp(QtWidgets.QMainWindow, gui.Ui_MainWindow):
         for i, row in enumerate(ans):
             for j, value in enumerate(row):
                 self.tblCars.setItem(i, j, QTableWidgetItem(value))
+        self.tblCars.resizeColumnsToContents()
 
     def init_customers(self):
         ans = db.customers_select()
@@ -112,6 +100,7 @@ class ExampleApp(QtWidgets.QMainWindow, gui.Ui_MainWindow):
         for i, row in enumerate(ans):
             for j, value in enumerate(row):
                 self.tblCustomers.setItem(i, j, QTableWidgetItem(value))
+        self.tblCustomers.resizeColumnsToContents()
 
     def init_orders(self):
         ans = db.orders_select()
@@ -119,6 +108,7 @@ class ExampleApp(QtWidgets.QMainWindow, gui.Ui_MainWindow):
         for i, row in enumerate(ans):
             for j, value in enumerate(row):
                 self.tblOrders.setItem(i, j, QTableWidgetItem(str(value)))
+        self.tblOrders.resizeColumnsToContents()
 
     def init_payment(self):
         ans = db.payment_select()
@@ -126,6 +116,7 @@ class ExampleApp(QtWidgets.QMainWindow, gui.Ui_MainWindow):
         for i, row in enumerate(ans):
             for j, value in enumerate(row):
                 self.tblPayment.setItem(i, j, QTableWidgetItem(str(value)))
+        self.tblPayment.resizeColumnsToContents()
 
     def init_workshop(self):
         ans = db.workshops_select()
@@ -133,6 +124,7 @@ class ExampleApp(QtWidgets.QMainWindow, gui.Ui_MainWindow):
         for i, row in enumerate(ans):
             for j, value in enumerate(row):
                 self.tblWorkshop.setItem(i, j, QTableWidgetItem(str(value)))
+        self.tblWorkshop.resizeColumnsToContents()
 
     def init_parts(self):
         ans = db.parts_in_workshop_select()
@@ -140,6 +132,7 @@ class ExampleApp(QtWidgets.QMainWindow, gui.Ui_MainWindow):
         for i, row in enumerate(ans):
             for j, value in enumerate(row):
                 self.tblParts.setItem(i, j, QTableWidgetItem(str(value)))
+        self.tblParts.resizeColumnsToContents()
 
     def init_providers(self):
         ans = db.parts_providers_select()
@@ -147,6 +140,7 @@ class ExampleApp(QtWidgets.QMainWindow, gui.Ui_MainWindow):
         for i, row in enumerate(ans):
             for j, value in enumerate(row):
                 self.tblProviders.setItem(i, j, QTableWidgetItem(str(value)))
+        self.tblProviders.resizeColumnsToContents()
 
     def init_details(self):
         ans = db.can_provide_select()
@@ -154,6 +148,7 @@ class ExampleApp(QtWidgets.QMainWindow, gui.Ui_MainWindow):
         for i, row in enumerate(ans):
             for j, value in enumerate(row):
                 self.tblDetails.setItem(i, j, QTableWidgetItem(str(value)))
+        self.tblDetails.resizeColumnsToContents()
 
     def init_repairs(self):
         ans = db.repairs_select()
@@ -161,6 +156,7 @@ class ExampleApp(QtWidgets.QMainWindow, gui.Ui_MainWindow):
         for i, row in enumerate(ans):
             for j, value in enumerate(row):
                 self.tblRepairs.setItem(i, j, QTableWidgetItem(str(value)))
+        self.tblRepairs.resizeColumnsToContents()
 
     def init_charging_station(self):
         ans = db.charging_stations_select()
@@ -180,6 +176,8 @@ class ExampleApp(QtWidgets.QMainWindow, gui.Ui_MainWindow):
 
                 else:
                     self.tblChargSt.setItem(i, j, QTableWidgetItem(str(value)))
+        self.tblChargSt.resizeColumnsToContents()
+        self.tblChargSt.resizeRowsToContents()
 
     def init_charges(self):
         ans = db.charges_select()
@@ -187,6 +185,7 @@ class ExampleApp(QtWidgets.QMainWindow, gui.Ui_MainWindow):
         for i, row in enumerate(ans):
             for j, value in enumerate(row):
                 self.tblCharges.setItem(i, j, QTableWidgetItem(str(value)))
+        self.tblCharges.resizeColumnsToContents()
 
 
 class Query1(QtWidgets.QMainWindow, query1.Ui_MainWindow):
@@ -210,6 +209,8 @@ class Query2(QtWidgets.QMainWindow, query2.Ui_MainWindow):
 
     def search(self):
         ans = db.query2(self.lineEdit.text())
+        error_dialog = QtWidgets.QErrorMessage()
+        error_dialog.showMessage('Incorrect format of input')
         self.tableWidget.setRowCount(len(ans))
         for i, row in enumerate(ans):
             for j, value in enumerate(row):
@@ -224,6 +225,15 @@ class Query3(QtWidgets.QMainWindow, query3.Ui_MainWindow):
         super().__init__()
         self.setWindowTitle('Query 3')
         self.setupUi(self)
+
+    def init_table(self):
+        ans = db.query3()
+        self.tableWidget.setRowCount(len(ans))
+        for i, row in enumerate(ans):
+            for j, value in enumerate(row):
+                self.tableWidget.setItem(i, j, QTableWidgetItem(str(value)))
+        self.tableWidget.resizeRowsToContents()
+        self.tableWidget.resizeColumnsToContents()
 
 
 class Query4(QtWidgets.QMainWindow, query4.Ui_MainWindow):
@@ -268,6 +278,24 @@ class Query6(QtWidgets.QMainWindow, query6.Ui_MainWindow):
         super().__init__()
         self.setWindowTitle('Query 6')
         self.setupUi(self)
+        self.initTbl()
+
+    def initTbl(self):
+        ans0, ans1 = db.query6()
+        self.tblFrom.setRowCount(3)
+        self.tblTo.setRowCount(3)
+        for i, row in enumerate(ans0):
+            print(i, row, row[0])
+            for j, v in enumerate(row):
+                self.tblFrom.setItem(i, j, QTableWidgetItem(str(v)))
+
+        for i, row in enumerate(ans1):
+            for j, v in enumerate(row):
+                self.tblTo.setItem(i, j, QTableWidgetItem(str(v)))
+        # self.tblFromt.resizeRowsToContents()
+        # self.tblFrom.resizeColumnsToContents()
+        # self.tblTo.resizeRowsToContents()
+        # self.tblTo.resizeColumnsToContents()
 
 
 class Query7(QtWidgets.QMainWindow, query7.Ui_MainWindow):
@@ -279,6 +307,16 @@ class Query7(QtWidgets.QMainWindow, query7.Ui_MainWindow):
         val = db.query7()
         for i in range(len(val)):
             self.textBrowser.append(val[i][0])
+        self.pushButton.clicked.connect(self.search)
+
+    def search(self):
+        ans = db.query5(self.lineEdit.text())
+        self.tableWidget.setRowCount(len(ans))
+        for i, row in enumerate(ans):
+            for j, value in enumerate(row):
+                self.tableWidget.setItem(i, j, QTableWidgetItem(str(value)))
+        self.tableWidget.resizeRowsToContents()
+        self.tableWidget.resizeColumnsToContents()
 
 
 class Query8(QtWidgets.QMainWindow, query8.Ui_MainWindow):
