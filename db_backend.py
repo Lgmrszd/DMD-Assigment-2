@@ -1,8 +1,17 @@
 from dbcore import conn
 import test_data
+import datetime
 
 with open("creation.sql", "r") as f:
     creation_sql = f.read()
+
+
+def check_date(date):
+    try:
+        datetime.datetime.strptime(date, "%Y-%m-%d")
+        return True
+    except ValueError:
+        return False
 
 
 def create_tables():
@@ -181,6 +190,9 @@ def query1():
 
 
 def query2(date):
+    valid = check_date(date)
+    if not valid:
+        return False
     sql_statement = ("SELECT a, count(time)\n"
                      "FROM \n"
                      "(select 0 as a union values (0),(1),(2),(3),(4),(5),(6),(7),(8),(9),(10),(11),(12),(13),(14),"
@@ -222,6 +234,9 @@ def query4(username):
 
 
 def query5(date):
+    valid = check_date(date)
+    if not valid:
+        return False
     sql_statement = ("SELECT car_id, trav/c, strftime('%H:%M', sec/c, 'unixepoch')\n"
                      "FROM (\n"
                      "    SELECT car_id, sum(traveled_to_client) as trav, "
