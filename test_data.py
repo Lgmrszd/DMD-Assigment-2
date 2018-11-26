@@ -5,10 +5,21 @@ __colors = ["Red", "Green", "Blue", "Magenta", "Yellow", "Silver", "Gray", "Whit
 __models = [("Toyota Prius", "Type 1"), ("Tesla Model S", "Tesla Supercharger"),
             ("Tesla Model 3", "Tesla Supercharger"), ("KAMAZ", "GOST 23784"), ("Waymo", "Type 2"), ("ICar", "Lighting"),
             ("Ford Japan", "CHAdeMO")]
+__parts_for = [("Tesla Supercharger Connector", "Tesla Model 3"), ("Tesla Supercharger Connector", "Tesla Model S"),
+               ("ICar Engine", "ICar"), ("Lidar T1", "KAMAZ"), ("Lidar T1", "Toyota Prius"),
+               ("Lidar T2", "Tesla Model S"), ("Lidar T2", "Tesla Model 3"), ("Lidar T2", "Ford Japan")]
 
 
 def car_types():
     return __models
+
+
+def parts():
+    return [(j,) for j in set([i[0] for i in __parts_for])]
+
+
+def parts_for():
+    return __parts_for
 
 
 def random_car_plate_number():
