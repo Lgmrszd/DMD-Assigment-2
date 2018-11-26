@@ -3,7 +3,7 @@ import datetime
 
 __ch_count = 12
 __plate_formats = [(("L", 4), ("-",), ("d", 3)), (("L", 3), ("-",), ("d", 4))]
-__locations = ["shops", "west square", "east square", "north square", "tavern", "medical center"]
+__locations = ["shops", "west square", "east square", "north square", "tavern", "hospital"]
 __colors = ["Red", "Green", "Blue", "Magenta", "Yellow", "Silver", "Gray", "White", "Black"]
 __models = [("Toyota Prius", "Type 1"), ("Tesla Model S", "Tesla Supercharger"),
             ("Tesla Model 3", "Tesla Supercharger"), ("KAMAZ", "GOST 23784"), ("Waymo", "Type 2"), ("ICar", "Lighting"),
@@ -114,6 +114,51 @@ def orders_payments(cars_tuples):
     orders_list[-1] = tuple(false_order)
     payments_list[-1] = tuple(false_payment)
 
+    # custom to
+    for i in range(5):
+        username = random.choice(__customers)[0]
+        car_id = cars_tuples[random.randint(1, 18) - 1][0]
+        date_time = today - datetime.timedelta(days=random.randint(1, 10),
+                                               hours=random.randint(0, 23),
+                                               minutes=random.randint(0, 59))
+        _from = random.choice(__locations)
+        _to = "tavern"
+        while _from == _to:
+            _to = random.choice(__locations)
+        price = 100*random.randint(1, 7)
+        tr2c = random.randint(500, 2000)
+        duration = "{:02}:{:02}".format(random.randint(0, 1), random.randint(0, 59))
+
+        order = (username, car_id, date_time.strftime("%Y-%m-%d %H:%M"), _from, _to, "Done", price, tr2c, duration)
+        orders_list.append(order)
+
+        p_dt = date_time + datetime.timedelta(minutes=random.randint(0, 10))
+        payment = (username, car_id, date_time.strftime("%Y-%m-%d %H:%M"), p_dt.strftime("%Y-%m-%d %H:%M"), price)
+        payments_list.append(payment)
+
+    # custom from
+    for i in range(5):
+        username = random.choice(__customers)[0]
+        car_id = cars_tuples[random.randint(1, 18) - 1][0]
+        date_time = today - datetime.timedelta(days=random.randint(1, 10),
+                                               hours=random.randint(0, 23),
+                                               minutes=random.randint(0, 59))
+        _from = "hospital"
+        _to = random.choice(__locations)
+        while _from == _to:
+            _to = random.choice(__locations)
+        price = 100*random.randint(1, 7)
+        tr2c = random.randint(500, 2000)
+        duration = "{:02}:{:02}".format(random.randint(0, 1), random.randint(0, 59))
+
+        order = (username, car_id, date_time.strftime("%Y-%m-%d %H:%M"), _from, _to, "Done", price, tr2c, duration)
+        orders_list.append(order)
+
+        p_dt = date_time + datetime.timedelta(minutes=random.randint(0, 10))
+        payment = (username, car_id, date_time.strftime("%Y-%m-%d %H:%M"), p_dt.strftime("%Y-%m-%d %H:%M"), price)
+        payments_list.append(payment)
+
+    # 3 months ago
     for i in range(5):
         username = random.choice(__customers)[0]
         car_id = cars_tuples[random.randint(1, 18) - 1][0]

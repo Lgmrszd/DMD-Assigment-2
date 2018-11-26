@@ -233,6 +233,49 @@ def query5(date):
     return _selection(sql_statement, (date,))
 
 
+def query6():
+    sql_statement_1 = ("SELECT b, e, from_\n"
+                       "FROM(\n"
+                       "    SELECT b, e, from_, count(*) as c\n"
+                       "    FROM (select ? as b, ? as e), orders\n"
+                       "    WHERE\n"
+                       "        CAST(strftime('%s', b) AS INTEGER) < CAST(strftime('%s', time(datetime)) AS INTEGER)\n"
+                       "        AND CAST(strftime('%s', time(datetime)) as INTEGER) < CAST(strftime('%s', e) as INTEGER)\n"
+                       "    GROUP BY from_\n"
+                       "    UNION values(?, ?, null, 0)\n"
+                       ")\n"
+                       "ORDER BY c DESC LIMIT 1;")
+
+    morning = _selection(sql_statement_1, ("07:00", "10:00", "07:00", "10:00"))
+    afternoon = _selection(sql_statement_1, ("12:00", "14:00", "12:00", "14:00"))
+    evening = _selection(sql_statement_1, ("17:00", "19:00", "17:00", "19:00"))
+    _all = []
+    _all.extend(morning)
+    _all.extend(afternoon)
+    _all.extend(evening)
+
+    sql_statement_2 = ("SELECT b, e, to_\n"
+                       "FROM(\n"
+                       "    SELECT b, e, to_, count(*) as c\n"
+                       "    FROM (select ? as b, ? as e), orders\n"
+                       "    WHERE\n"
+                       "        CAST(strftime('%s', b) AS INTEGER) < CAST(strftime('%s', time(datetime)) AS INTEGER)\n"
+                       "        AND CAST(strftime('%s', time(datetime)) as INTEGER) < CAST(strftime('%s', e) as INTEGER)\n"
+                       "    GROUP BY to_\n"
+                       "    UNION values(?, ?, null, 0)\n"
+                       ")\n"
+                       "ORDER BY c DESC LIMIT 1;")
+
+    morning = _selection(sql_statement_2, ("07:00", "10:00", "07:00", "10:00"))
+    afternoon = _selection(sql_statement_2, ("12:00", "14:00", "12:00", "14:00"))
+    evening = _selection(sql_statement_2, ("17:00", "19:00", "17:00", "19:00"))
+    _all_2 = []
+    _all_2.extend(morning)
+    _all_2.extend(afternoon)
+    _all_2.extend(evening)
+    return _all, _all_2
+
+
 def query7():
     sql_statement = ("SELECT C.car_id\n"
                      "FROM cars C\n"
