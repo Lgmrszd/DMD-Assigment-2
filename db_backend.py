@@ -311,24 +311,28 @@ def query7():
 def query8():
     sql_statement = ("SELECT username, count(distinct C.datetime)\n"
                      "FROM orders O, charges C\n"
-                     "WHERE date(O.datetime) = date(C.datetime)\n"
+                     "WHERE date(O.datetime) = date(C.datetime) AND CAST(strftime('%s', C.datetime) AS INTEGER) > CAST(strftime('%s', ?) AS INTEGER)\n"
                      "GROUP BY username;")
     return _selection(sql_statement)
 
+
 def query10():
-    sql_statement = ("select car_id, c+p\n"
+    sql_statement = ("select C.model\n"
                      "from \n"
                      "(\n"
-                     "select car_id, 0 as c, sum(price) as p\n"
+                     "select car_id as id, 0 as c, sum(price) as p\n"
                      "FROM repairs\n"
                      "WHERE CAST(strftime('%s', datetime) AS INTEGER) > CAST(strftime('%s', 'now', '-1000 days') AS INTEGER)\n"
                      "GROUP BY car_id\n"
                      "\n"
                      "union\n"
                      "\n"
-                     "select car_id, sum(cost) as c, 0 as p\n"
+                     "select car_id as id, sum(cost) as c, 0 as p\n"
                      "FROM charges\n"
                      "WHERE CAST(strftime('%s', datetime) AS INTEGER) > CAST(strftime('%s', 'now', '-1000 days') AS INTEGER)\n"
                      "GROUP BY car_id\n"
-                     ");")
+                     ")\n"
+                     "INNER JOIN cars C ON c.car_id == id INNER JOIN CAR_TYPES T ON C.model = T.model\n"
+                     "GROUP BY id\n"
+                     "ORDER BY sum(c+p) DESC LIMIT 1;")
     return _selection(sql_statement)
