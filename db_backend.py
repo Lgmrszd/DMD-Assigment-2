@@ -98,5 +98,9 @@ def payment_select():
 def init():
     create_tables()
 
+
 def query1():
-    pass
+    sql_statement = ("SELECT car_id\n"
+                     "FROM cars\n"
+                     "WHERE color LIKE 'red' AND car_id LIKE 'AN%';")
+    return _selection(sql_statement)

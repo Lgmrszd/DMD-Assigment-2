@@ -2,7 +2,9 @@ import random
 
 __plate_formats = [(("L", 4), ("-",), ("d", 3)), (("L", 3), ("-",), ("d", 4))]
 __colors = ["Red", "Green", "Blue", "Magenta", "Yellow", "Silver", "Gray", "White", "Black"]
-__models = [("Toyota Prius", "EU"), ("Tesla Model S", "EU"), ("Tesla Model 3", ""), ("KAMAZ", "GOST 23784-98"), ("Waymo"), ("ICar")]
+__models = [("Toyota Prius", "Type 1"), ("Tesla Model S", "Tesla Supercharger"),
+            ("Tesla Model 3", "Tesla Supercharger"), ("KAMAZ", "GOST 23784"), ("Waymo"), ("ICar", "Lighting"),
+            ("Ford Japan", "CHAdeMO")]
 
 
 def car_types():
@@ -27,5 +29,5 @@ def random_car_plate_number():
 def random_car():
     plate_num = random_car_plate_number()
     color = random.choice(__colors)
-    model = random.choice(__models)
+    model = random.choice(__models)[0]
     return plate_num, color, model
