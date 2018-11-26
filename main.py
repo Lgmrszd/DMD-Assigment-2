@@ -126,7 +126,6 @@ class ExampleApp(QtWidgets.QMainWindow, gui.Ui_MainWindow):
 
                 else:
                     self.tblChargSt.setItem(i, j, QTableWidgetItem(str(value)))
-        table.verticalHeader().setStretchLastSection(True)
 
     def init_charges(self):
         ans = db.charges_select()
@@ -143,7 +142,10 @@ class Query1(QtWidgets.QMainWindow, query1.Ui_MainWindow):
         # и т.д. в файле query1.py
         super().__init__()
         self.setWindowTitle('Query 1')
-        self.setupUi(self)  # Это нужно для инициализации нашего дизайна
+        self.setupUi(self)
+        val = db.query1()
+        for i in range(len(val)):
+            self.textBrowser.append(val[i][0])
 
 
 def main():
