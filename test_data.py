@@ -67,16 +67,16 @@ def sockets():
     return sockets_list
 
 
-def repairs():
+def repairs(cars_tuples):
     today = datetime.datetime.today()
     repairs_list = []
     for i in range(5):
         wid = random.randint(1, 3)
-        car_id = random.randint(1, 18)
+        car_id = cars_tuples[random.randint(1, 18) - 1][0]
         date_time = today - datetime.timedelta(days=random.randint(1, 10),
                                                hours=random.randint(0, 23),
                                                minutes=random.randint(0, 59))
-        repair = (wid, car_id, date_time.strftime("%Y-%m-%d %H:%M"), "Done", (2+random.randint(1, 4))*10000)
+        repair = (wid, car_id, date_time.strftime("%Y-%m-%d %H:%M"), "Done", (2+random.randint(1, 4))*1000)
         repairs_list.append(repair)
     return repairs_list
 
@@ -194,19 +194,19 @@ def charges(cars_tuples):
                                                hours=random.randint(0, 23),
                                                minutes=random.randint(0, 59))
         charging_time = "{:02}:{:02}".format(random.randint(0, 1), random.randint(0, 59))
-        cost = 100*random.randint(1, 5)
+        cost = 1000*random.randint(1, 5)
         charge = (uid, car_id, date_time, "Done", charging_time, cost)
         charges_list.append(charge)
 
     # greedy car
     car_id = cars_tuples[random.randint(1, 18) - 1][0]
-    for i in range(5):
+    for i in range(10):
         uid = random.randint(1, __ch_count)
         date_time = today - datetime.timedelta(days=random.randint(1, 4),
                                                hours=random.randint(0, 23),
                                                minutes=random.randint(0, 59))
         charging_time = "{:02}:{:02}".format(random.randint(0, 1), random.randint(0, 59))
-        cost = 100*random.randint(1, 5)
+        cost = 1000*random.randint(1, 5)
         charge = (uid, car_id, date_time, "Done", charging_time, cost)
         charges_list.append(charge)
 

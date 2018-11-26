@@ -99,7 +99,7 @@ def create_test_data():
 
     sql_statement = "INSERT INTO `REPAIRS` (WID,CAR_ID,DATETIME,STATUS,PRICE) " \
                     "VALUES (?, ?, ?, ?, ?);"
-    repairs = test_data.repairs()
+    repairs = test_data.repairs(cars)
     _insertion(sql_statement, repairs)
 
     orders, payments = test_data.orders_payments(cars)
@@ -315,3 +315,20 @@ def query8():
                      "GROUP BY username;")
     return _selection(sql_statement)
 
+def query10():
+    sql_statement = ("select car_id, c+p\n"
+                     "from \n"
+                     "(\n"
+                     "select car_id, 0 as c, sum(price) as p\n"
+                     "FROM repairs\n"
+                     "WHERE CAST(strftime('%s', datetime) AS INTEGER) > CAST(strftime('%s', 'now', '-1000 days') AS INTEGER)\n"
+                     "GROUP BY car_id\n"
+                     "\n"
+                     "union\n"
+                     "\n"
+                     "select car_id, sum(cost) as c, 0 as p\n"
+                     "FROM charges\n"
+                     "WHERE CAST(strftime('%s', datetime) AS INTEGER) > CAST(strftime('%s', 'now', '-1000 days') AS INTEGER)\n"
+                     "GROUP BY car_id\n"
+                     ");")
+    return _selection(sql_statement)
