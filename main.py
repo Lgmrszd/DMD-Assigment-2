@@ -4,6 +4,15 @@ from PyQt5.QtWidgets import QTableWidgetItem, QHeaderView
 
 import gui  # Это наш конвертированный файл дизайна
 import query1
+import query2
+import query3
+import query4
+import query5
+import query6
+import query7
+import query8
+import query9
+import query10
 import db_backend as db
 
 
@@ -40,10 +49,55 @@ class ExampleApp(QtWidgets.QMainWindow, gui.Ui_MainWindow):
         self.tblChargSt.resizeRowsToContents()
         self.tblCharges.resizeColumnsToContents()
         self.btnQ1.clicked.connect(self.show_query_1)
+        self.btnQ2.clicked.connect(self.show_query_2)
+        self.btnQ3.clicked.connect(self.show_query_3)
+        self.btnQ4.clicked.connect(self.show_query_4)
+        self.btnQ5.clicked.connect(self.show_query_5)
+        self.btnQ6.clicked.connect(self.show_query_6)
+        self.btnQ7.clicked.connect(self.show_query_7)
+        self.btnQ8.clicked.connect(self.show_query_8)
+        self.btnQ9.clicked.connect(self.show_query_9)
+        self.btnQ10.clicked.connect(self.show_query_10)
 
     def show_query_1(self):
         self.q1 = Query1()
         self.q1.show()
+
+    def show_query_2(self):
+        self.q2 = Query2()
+        self.q2.show()
+
+    def show_query_3(self):
+        self.q3 = Query3()
+        self.q3.show()
+
+    def show_query_4(self):
+        self.q4 = Query4()
+        self.q4.show()
+
+    def show_query_5(self):
+        self.q5 = Query5()
+        self.q5.show()
+
+    def show_query_6(self):
+        self.q6 = Query6()
+        self.q6.show()
+
+    def show_query_7(self):
+        self.q7 = Query7()
+        self.q7.show()
+
+    def show_query_8(self):
+        self.q8 = Query8()
+        self.q8.show()
+
+    def show_query_9(self):
+        self.q9 = Query9()
+        self.q9.show()
+
+    def show_query_10(self):
+        self.q10 = Query10()
+        self.q10.show()
 
     def init_cars(self):
         ans = db.cars_select()
@@ -138,14 +192,117 @@ class ExampleApp(QtWidgets.QMainWindow, gui.Ui_MainWindow):
 class Query1(QtWidgets.QMainWindow, query1.Ui_MainWindow):
 
     def __init__(self):
-        # Это здесь нужно для доступа к переменным, методам
-        # и т.д. в файле query1.py
         super().__init__()
         self.setWindowTitle('Query 1')
         self.setupUi(self)
         val = db.query1()
         for i in range(len(val)):
             self.textBrowser.append(val[i][0])
+
+
+class Query2(QtWidgets.QMainWindow, query2.Ui_MainWindow):
+
+    def __init__(self):
+        super().__init__()
+        self.setWindowTitle('Query 2')
+        self.setupUi(self)
+        self.pushButton.clicked.connect(self.search)
+
+    def search(self):
+        ans = db.query2(self.lineEdit.text())
+        self.tableWidget.setRowCount(len(ans))
+        for i, row in enumerate(ans):
+            for j, value in enumerate(row):
+                self.tableWidget.setItem(i, j, QTableWidgetItem(str(value)))
+        self.tableWidget.resizeRowsToContents()
+        self.tableWidget.resizeColumnsToContents()
+
+
+class Query3(QtWidgets.QMainWindow, query3.Ui_MainWindow):
+
+    def __init__(self):
+        super().__init__()
+        self.setWindowTitle('Query 3')
+        self.setupUi(self)
+
+
+class Query4(QtWidgets.QMainWindow, query4.Ui_MainWindow):
+
+    def __init__(self):
+        super().__init__()
+        self.setWindowTitle('Query 4')
+        self.setupUi(self)
+        self.btnSearch.clicked.connect(self.search)
+
+    def search(self):
+        ans = db.query4(self.lineEdit.text())
+        self.tbl.setRowCount(len(ans))
+        for i, row in enumerate(ans):
+            for j, value in enumerate(row):
+                self.tbl.setItem(i, j, QTableWidgetItem(str(value)))
+        self.tbl.resizeRowsToContents()
+        self.tbl.resizeColumnsToContents()
+
+
+class Query5(QtWidgets.QMainWindow, query5.Ui_MainWindow):
+
+    def __init__(self):
+        super().__init__()
+        self.setWindowTitle('Query 5')
+        self.setupUi(self)
+        self.pushButton.clicked.connect(self.search)
+
+    def search(self):
+        ans = db.query5(self.lineEdit.text())
+        self.tableWidget.setRowCount(len(ans))
+        for i, row in enumerate(ans):
+            for j, value in enumerate(row):
+                self.tableWidget.setItem(i, j, QTableWidgetItem(str(value)))
+        self.tableWidget.resizeRowsToContents()
+        self.tableWidget.resizeColumnsToContents()
+
+
+class Query6(QtWidgets.QMainWindow, query6.Ui_MainWindow):
+
+    def __init__(self):
+        super().__init__()
+        self.setWindowTitle('Query 6')
+        self.setupUi(self)
+
+
+class Query7(QtWidgets.QMainWindow, query7.Ui_MainWindow):
+
+    def __init__(self):
+        super().__init__()
+        self.setWindowTitle('Query 7')
+        self.setupUi(self)
+        val = db.query7()
+        for i in range(len(val)):
+            self.textBrowser.append(val[i][0])
+
+
+class Query8(QtWidgets.QMainWindow, query8.Ui_MainWindow):
+
+    def __init__(self):
+        super().__init__()
+        self.setWindowTitle('Query 8')
+        self.setupUi(self)
+
+
+class Query9(QtWidgets.QMainWindow, query9.Ui_MainWindow):
+
+    def __init__(self):
+        super().__init__()
+        self.setWindowTitle('Query 9')
+        self.setupUi(self)
+
+
+class Query10(QtWidgets.QMainWindow, query10.Ui_MainWindow):
+
+    def __init__(self):
+        super().__init__()
+        self.setWindowTitle('Query 10')
+        self.setupUi(self)
 
 
 def main():
