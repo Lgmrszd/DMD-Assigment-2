@@ -20,9 +20,12 @@ def clear_tables():
     cur.close()
 
 
-def _selection(sql_statement):
+def _selection(sql_statement, data=None):
     cur = conn.cursor()
-    cur.execute(sql_statement)
+    if data:
+        cur.execute(sql_statement, data)
+    else:
+        cur.execute(sql_statement)
     result = cur.fetchall()
     cur.close()
     return result
@@ -124,5 +127,15 @@ def init():
 def query1():
     sql_statement = ("SELECT car_id\n"
                      "FROM cars\n"
-                     "WHERE color LIKE 'red' AND car_id LIKE 'AN%';")
+                     "WHERE color LIKE 'Red' AND car_id LIKE 'AN%';")
     return _selection(sql_statement)
+
+
+def query4(username):
+    sql_statement = ("SELECT O.datetime, O.car_id\n"
+                     "FROM orders O, payment P\n"
+                     "WHERE O.car_id = P.car_id AND O.datetime = P.order_datetime AND O.username = P.username "
+                     "and P.username = ?\n"
+                     "GROUP by O.datetime, O.car_id\n"
+                     "HAVING O.price != SUM(P.amount);")
+    return _selection(sql_statement, (username,))

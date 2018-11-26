@@ -42,3 +42,31 @@ def random_car():
     color = random.choice(__colors)
     model = random.choice(__models)[0]
     return plate_num, color, model
+
+
+def specific_cars():
+    cars = []
+    for _ in range(3):
+        plate_num = random_car_plate_number()
+        plate_num = "AN" + plate_num[2:]
+        color = random.choice(__colors)
+        model = random.choice(__models)[0]
+        while color == "Red":
+            color = random.choice(__colors)
+        cars.append((plate_num, color, model))
+    for _ in range(3):
+        plate_num = random_car_plate_number()
+        color = "Red"
+        model = random.choice(__models)[0]
+        while plate_num.startswith("AN"):
+            plate_num = random_car_plate_number()
+        cars.append((plate_num, color, model))
+    for _ in range(2):
+        plate_num = random_car_plate_number()
+        plate_num = "AN" + plate_num[2:]
+        color = "Red"
+        model = random.choice(__models)[0]
+        cars.append((plate_num, color, model))
+    return cars
+
+
