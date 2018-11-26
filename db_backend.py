@@ -63,8 +63,7 @@ def create_test_data():
     _insertion(sql_statement, can_provide)
 
     sql_statement = "INSERT INTO `CARS` (CAR_ID, COLOR, MODEL) VALUES (?, ?, ?)"
-    cars = [test_data.random_car() for _ in range(10)]
-    cars.extend(test_data.specific_cars())
+    cars = test_data.cars()
     _insertion(sql_statement, cars)
 
     sql_statement = "INSERT INTO `WORKSHOPS` (WID,GPS_LOCATION,AVAILABILITY) VALUES (?, ?, ?);"
@@ -75,6 +74,11 @@ def create_test_data():
                     "VALUES (?, ?, ?, ?, ?, ?, ?);"
     customers = test_data.customers()
     _insertion(sql_statement, customers)
+
+    sql_statement = "INSERT INTO `CHARGING_STATIONS` (UID,GPS_LOCATION,CHARGING_COST,CHARGING_TIME) " \
+                    "VALUES (?, ?, ?, ?);"
+    charging_stations = test_data.charging_stations()
+    _insertion(sql_statement, charging_stations)
 
 
 def cars_select():
@@ -149,6 +153,21 @@ def query1():
     return _selection(sql_statement)
 
 
+def query2(date):
+    sql_statement = ("SELECT a, count(time)\n"
+                     "FROM \n"
+                     "(select 0 as a union values (0),(1),(2),(3),(4),(5),(6),(7),(8),(9),(10),(11),(12),(13),(14),"
+                     "(15),(16),(17),(18),(19),(20),(21),(22),(23))\n"
+                     "LEFT JOIN\n"
+                     "(\n"
+                     "    SELECT time(strftime('%s', datetime) - 60*strftime('%M', datetime), 'unixepoch') as time\n"
+                     "    FROM charges\n"
+                     "    WHERE date(datetime) LIKE '?'\n"
+                     ") ON a = CAST(strftime('%H', time) AS INTEGER)\n"
+                     "GROUP BY a;")
+    return _selection(sql_statement, (date,))
+
+
 def query4(username):
     sql_statement = ("SELECT O.datetime, O.car_id\n"
                      "FROM orders O, payment P\n"
@@ -160,11 +179,13 @@ def query4(username):
 
 
 def query5(date):
-    sql_statement = ("SELECT trav/c, strftime('%H:%M', sec/c, 'unixepoch')\n"
+    sql_statement = ("SELECT car_id, trav/c, strftime('%H:%M', sec/c, 'unixepoch')\n"
                      "FROM (\n"
-                     "    SELECT sum(traveled_to_client) as trav, sum(strftime('%s', duration)) as sec, count(*) as c\n"
+                     "    SELECT car_id, sum(traveled_to_client) as trav, "
+                     "sum(strftime('%s', duration)) as sec, count(*) as c\n"
                      "    FROM orders\n"
-                     "    WHERE date(datetime) like ?\n"
+                     "    WHERE date(datetime) like '?'\n"
+                     "    GROUP BY car_id\n"
                      ");")
     return _selection(sql_statement, (date,))
 

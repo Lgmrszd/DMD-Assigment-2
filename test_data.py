@@ -20,14 +20,34 @@ __workshops = [(1, "GPS[WS_1])", "Never available"), (2, "GPS[WS_2])", "Sometime
 
 __customers = [('xX_CoolName_Xx', 'CoolMail@cool-email.com', '+79805551122',
                 'Vasya Pupkin', 'Russia', 'Moscow', '123131'),
-               ('m.petrovna_1970', 'm.petrovna_1970@inbox.ru', '+79021849184',
-                'Maria Petrovna', 'Russia', 'Kaliningrad', '948173'),
                ('Petr_Dude', 'Petrov123@yandex.ru', '+79042744315',
-                'Petr Vasilyev', 'Russia', 'Kazan', '948173')]
+                'Petr Vasilyev', 'Russia', 'Kazan', '948173'),
+               ('m.petrova_1989', 'm.petrova_1970@inbox.ru', '+79021849184',
+                'Maria Petrova', 'Russia', 'Kaliningrad', '948173'),
+               ('n.prutko_1983', 'n.prutko_1983@yandex.ru', '+79028201834',
+                'Nadezhda Prutko', 'Russia', 'Samara', '861243'),
+               ('a.smirnow_1994', 'a.smirnow_1994@gmail.com', '+79048591295',
+                'Aleksey Smirnov', 'Russia', 'Kaliningrad', '948173'),
+               ('l.petrova_1958', ';.petrova_1958@inbox.ru', '+79051738245',
+                'Lena Petrova', 'Russia', 'Novokuznetsk', '858914'),
+               ('f.petrov_1996', 'f.petrov_1996@inbox.ru', '+79409281853',
+                'Fedor Petrov', 'Russia', 'Omsk', '819472')]
+__cities = ["Kazan", "Moscow", "Kaliningrad", "Skolkovo", "Omsk", "Petrozavodsk", "Novokuznetsk", "Uzhgorod",
+            "Novokuznetsk", "Oktyabrskiy", "Belebey", "Samara"]
 
 
 def car_types():
     return __models
+
+
+def charging_stations():
+    stations_list = []
+    for i in range(1, 13):
+        station = (i, "GPS[{}]".format(random.choice(__cities)),
+                   random.randint(10, 20)/10 + 1,
+                   random.randint(1, 5))
+        stations_list.append(station)
+    return stations_list
 
 
 def parts():
@@ -54,6 +74,10 @@ def customers():
     return __customers
 
 
+def parts():
+    return [(j,) for j in set([i[0] for i in __parts_for])]
+
+
 def random_car_plate_number():
     plate_format = random.choice(__plate_formats)
     plate_num = ""
@@ -77,7 +101,7 @@ def random_car():
 
 
 def specific_cars():
-    cars = []
+    cars_list = []
     for _ in range(3):
         plate_num = random_car_plate_number()
         plate_num = "AN" + plate_num[2:]
@@ -85,20 +109,24 @@ def specific_cars():
         model = random.choice(__models)[0]
         while color == "Red":
             color = random.choice(__colors)
-        cars.append((plate_num, color, model))
+        cars_list.append((plate_num, color, model))
     for _ in range(3):
         plate_num = random_car_plate_number()
         color = "Red"
         model = random.choice(__models)[0]
         while plate_num.startswith("AN"):
             plate_num = random_car_plate_number()
-        cars.append((plate_num, color, model))
+        cars_list.append((plate_num, color, model))
     for _ in range(2):
         plate_num = random_car_plate_number()
         plate_num = "AN" + plate_num[2:]
         color = "Red"
         model = random.choice(__models)[0]
-        cars.append((plate_num, color, model))
-    return cars
+        cars_list.append((plate_num, color, model))
+    return cars_list
 
 
+def cars():
+    cars_list = [random_car() for _ in range(10)]
+    cars_list.extend(specific_cars())
+    return cars_list
