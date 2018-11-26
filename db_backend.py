@@ -55,7 +55,8 @@ def create_test_data():
     _insertion(sql_statement, parts_for)
 
     sql_statement = "INSERT INTO `CARS` (CAR_ID, COLOR, MODEL) VALUES (?, ?, ?)"
-    cars = [test_data.random_car() for i in range(20)]
+    cars = [test_data.random_car() for _ in range(10)]
+    cars.extend(test_data.specific_cars())
     _insertion(sql_statement, cars)
 
 
@@ -139,3 +140,30 @@ def query4(username):
                      "GROUP by O.datetime, O.car_id\n"
                      "HAVING O.price != SUM(P.amount);")
     return _selection(sql_statement, (username,))
+
+
+def query5(date):
+    sql_statement = ("SELECT trav/c, strftime('%H:%M', sec/c, 'unixepoch')\n"
+                     "FROM (\n"
+                     "    SELECT sum(traveled_to_client) as trav, sum(strftime('%s', duration)) as sec, count(*) as c\n"
+                     "    FROM orders\n"
+                     "    WHERE date(datetime) like ?\n"
+                     ");")
+    return _selection(sql_statement, (date,))
+
+
+def query7():
+    sql_statement = ("SELECT C.car_id, O.car_id\n"
+                     "FROM cars C\n"
+                     "LEFT JOIN\n"
+                     "(\n"
+                     "    SELECT car_id\n"
+                     "    FROM orders\n"
+                     "    WHERE CAST(strftime('%s', datetime) AS INTEGER) > CAST(strftime('%s', 'now', '-3 months') AS INTEGER)\n"
+                     ") as O ON C.car_id = O.car_id\n"
+                     "GROUP BY C.car_id\n"
+                     "ORDER BY count(O.car_id)\n"
+                     "LIMIT ROUND(0.1*(\n"
+                     "    SELECT COUNT(*) FROM cars\n"
+                     "));")
+    return _selection(sql_statement)
