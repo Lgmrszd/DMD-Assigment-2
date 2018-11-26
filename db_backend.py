@@ -54,6 +54,14 @@ def create_test_data():
     parts_for = test_data.parts_for()
     _insertion(sql_statement, parts_for)
 
+    sql_statement = "INSERT INTO `PARTS_PROVIDERS` (ID,ADRESS,NAME,PHONE) VALUES (?, ?, ?, ?);"
+    parts_providers = test_data.parts_providers()
+    _insertion(sql_statement, parts_providers)
+
+    sql_statement = "INSERT INTO `CAN_PROVIDE` (ID,NAME) VALUES (?, ?);"
+    can_provide = test_data.can_provide()
+    _insertion(sql_statement, can_provide)
+
     sql_statement = "INSERT INTO `CARS` (CAR_ID, COLOR, MODEL) VALUES (?, ?, ?)"
     cars = [test_data.random_car() for _ in range(10)]
     cars.extend(test_data.specific_cars())
