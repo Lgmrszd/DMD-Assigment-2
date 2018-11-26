@@ -308,12 +308,15 @@ def query7():
     return _selection(sql_statement)
 
 
-def query8():
+def query8(date):
+    valid = check_date(date)
+    if not valid:
+        return False
     sql_statement = ("SELECT username, count(distinct C.datetime)\n"
                      "FROM orders O, charges C\n"
                      "WHERE date(O.datetime) = date(C.datetime) AND CAST(strftime('%s', C.datetime) AS INTEGER) > CAST(strftime('%s', ?) AS INTEGER)\n"
                      "GROUP BY username;")
-    return _selection(sql_statement)
+    return _selection(sql_statement, (date,))
 
 
 def query10():
