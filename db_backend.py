@@ -11,7 +11,7 @@ def create_tables():
 
 
 def clear_tables():
-    tables = ['PAYMENT', 'CHARGES', 'ORDERS', 'REPAIRS', 'AVAILABLE_PARTS', 'PARTS_FOR', 'SOCKETS',
+    tables = ['PAYMENT', 'CHARGES', 'ORDERS', 'REPAIRS', 'AVAILABLE_PARTS', 'PARTS_FOR', 'SOCKETS', 'CAN_PROVIDE',
               'CHARGING_STATIONS', 'CUSTOMERS', 'CARS', 'CAR_TYPES', 'WORKSHOPS', 'CAR_PARTS', 'PARTS_PROVIDERS']
     cur = conn.cursor()
     for table in tables:
@@ -66,6 +66,15 @@ def create_test_data():
     cars = [test_data.random_car() for _ in range(10)]
     cars.extend(test_data.specific_cars())
     _insertion(sql_statement, cars)
+
+    sql_statement = "INSERT INTO `WORKSHOPS` (WID,GPS_LOCATION,AVAILABILITY) VALUES (?, ?, ?);"
+    workshops = test_data.workshops()
+    _insertion(sql_statement, workshops)
+
+    sql_statement = "INSERT INTO `CUSTOMERS` (USERNAME,EMAIL,PHONE,FULL_NAME,COUNTRY,CITY,ZIP_CODE) " \
+                    "VALUES (?, ?, ?, ?, ?, ?, ?);"
+    customers = test_data.customers()
+    _insertion(sql_statement, customers)
 
 
 def cars_select():

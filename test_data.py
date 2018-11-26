@@ -10,11 +10,20 @@ __parts_for = [("Tesla Supercharger Connector", "Tesla Model 3"), ("Tesla Superc
                ("Lidar T1", "KAMAZ"), ("Lidar T1", "Toyota Prius"),
                ("Lidar T2", "Tesla Model S"), ("Lidar T2", "Tesla Model 3"), ("Lidar T2", "Ford Japan")]
 
-__parts_providers = [(1, "Chicago", "IParts", "123456"), (2, "Petrovich Store", "Str. Pushkina", "+79801234567"),
-                     (3, "Auto Parts Co.", "City 17", "+10000000")]
+__parts_providers = [(1, "Chicago", "IParts", "123456"), (2, "Str. Pushkina", "Petrovich Store", "+79801234567"),
+                     (3, "City 17", "Auto Parts Co.", "+10000000")]
 __can_provide = [(1, "ICar Engine"),
                  (2, "Lidar 1"), (2, "Lidar 2"),
                  (3, "Tesla Supercharger Connector"), (3, "Lidar 2")]
+__workshops = [(1, "GPS[WS_1])", "Never available"), (2, "GPS[WS_2])", "Sometimes available"),
+               (3, "GPS[WS_3])", "Always available")]
+
+__customers = [('xX_CoolName_Xx', 'CoolMail@cool-email.com', '+79805551122',
+                'Vasya Pupkin', 'Russia', 'Moscow', '123131'),
+               ('m.petrovna_1970', 'm.petrovna_1970@inbox.ru', '+79021849184',
+                'Maria Petrovna', 'Russia', 'Kaliningrad', '948173'),
+               ('Petr_Dude', 'Petrov123@yandex.ru', '+79042744315',
+                'Petr Vasilyev', 'Russia', 'Kazan', '948173')]
 
 
 def car_types():
@@ -35,6 +44,15 @@ def parts_providers():
 
 def can_provide():
     return __can_provide
+
+
+def workshops():
+    return __workshops
+
+
+def customers():
+    return __customers
+
 
 def random_car_plate_number():
     plate_format = random.choice(__plate_formats)
