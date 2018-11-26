@@ -80,8 +80,18 @@ def create_test_data():
     charging_stations = test_data.charging_stations()
     _insertion(sql_statement, charging_stations)
 
-    # sql_statement = "INSERT INTO `SOCKETS` (UID,PLUG_TYPE,NUMBER) VALUES (?, ?, ?);"
+    sql_statement = "INSERT INTO `SOCKETS` (UID,PLUG_TYPE,NUMBER) VALUES (?, ?, ?);"
+    sockets = test_data.sockets()
+    _insertion(sql_statement, sockets)
 
+    sql_statement = "INSERT INTO `AVAILABLE_PARTS` (NAME,WID) VALUES (?, ?);"
+    available_parts = test_data.available_parts()
+    _insertion(sql_statement, available_parts)
+
+    sql_statement = "INSERT INTO `REPAIRS` (WID,CAR_ID,DATETIME,STATUS,PRICE) " \
+                    "VALUES (?, ?, ?, ?, ?);"
+    repairs = test_data.repairs()
+    _insertion(sql_statement, repairs)
 
 def cars_select():
     sql_statement = "select C.CAR_ID, C.MODEL, T.PLUG_TYPE, C.COLOR from CARS C, CAR_TYPES T where C.MODEL = T.MODEL;"
@@ -168,6 +178,22 @@ def query2(date):
                      ") ON a = CAST(strftime('%H', time) AS INTEGER)\n"
                      "GROUP BY a;")
     return _selection(sql_statement, (date,))
+
+
+def query3():
+    sql_statement = ("SELECT b, e, count(DISTINCT car_id)\n"
+                     "FROM (select '07:00' as b, '10:00' as e "
+                     "union values ('12:00', '14:00'), ('17:00', '19:00')), orders\n"
+                     "WHERE \n"
+                     "    --intersection\n"
+                     "    CAST(strftime('%s', b) AS INTEGER) < CAST(strftime('%s', time(datetime)) AS INTEGER) "
+                     "+ CAST(strftime('%s', duration) AS INTEGER) - CAST(strftime('%s', '00:00') AS INTEGER)\n"
+                     "    AND CAST( strftime('%s', time(datetime)) as INTEGER) < CAST(strftime('%s', e) as INTEGER)\n"
+                     "    --week constraint\n"
+                     "    AND CAST(strftime('%s', datetime) AS INTEGER) "
+                     "> CAST(strftime('%s', 'now', '-7 days') AS INTEGER)\n"
+                     "GROUP BY b;")
+    return _selection(sql_statement)
 
 
 def query4(username):

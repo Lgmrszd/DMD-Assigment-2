@@ -1,5 +1,5 @@
 import random
-
+import datetime
 
 __ch_count = 12
 __plate_formats = [(("L", 4), ("-",), ("d", 3)), (("L", 3), ("-",), ("d", 4))]
@@ -20,6 +20,10 @@ __can_provide = [(1, "ICar Engine"),
                  (3, "Tesla Supercharger Connector"), (3, "Lidar 2")]
 __workshops = [(1, "GPS[WS_1])", "Never available"), (2, "GPS[WS_2])", "Sometimes available"),
                (3, "GPS[WS_3])", "Always available")]
+
+__available_parts = [("Tesla Supercharger Connector", 1), ("Tesla Supercharger Connector", 3),
+                    ("Lidar T1", 1), ("Lidar T1", 2), ("Lidar T1", 3),
+                    ("Lidar T2", 2), ("Lidar T2", 3)]
 
 __customers = [('xX_CoolName_Xx', 'CoolMail@cool-email.com', '+79805551122',
                 'Vasya Pupkin', 'Russia', 'Moscow', '123131'),
@@ -45,7 +49,7 @@ def car_types():
 
 def charging_stations():
     stations_list = []
-    for i in range(1, 13):
+    for i in range(1, __ch_count+1):
         station = (i, "GPS[{}]".format(random.choice(__cities)),
                    random.randint(10, 20)/10 + 1,
                    random.randint(1, 5))
@@ -54,9 +58,33 @@ def charging_stations():
 
 
 def sockets():
-    for uid in range(1,):
+    sockets_list = []
+    for uid in range(1, __ch_count+1):
         for plug in __plug_types:
-            pass
+            socket = (uid, plug, random.randint(1, 10))
+            sockets_list.append(socket)
+    return sockets_list
+
+
+def repairs():
+    today = datetime.datetime.today()
+    repairs_list = []
+    for i in range(6):
+        wid = random.randint(1, 3)
+        car_id = random.randint(1, 18)
+        date_time = today - datetime.timedelta(days=random.randint(1, 10),
+                                               hours=random.randint(0, 23),
+                                               minutes=random.randint(0, 59))
+        repair = (wid, car_id, date_time.strftime("%Y-%m-%d %H:%M"), "Done", (2+random.randint(1, 4))*10000)
+        repairs_list.append(repair)
+    return repairs_list
+
+
+def charges_payments():
+    charges_list = []
+    payments_list = []
+
+    return charges_list, payments_list
 
 
 def parts():
@@ -81,6 +109,10 @@ def workshops():
 
 def customers():
     return __customers
+
+
+def available_parts():
+    return __available_parts
 
 
 def random_car_plate_number():
