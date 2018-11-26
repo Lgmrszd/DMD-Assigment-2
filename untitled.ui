@@ -18,7 +18,7 @@
     <item row="0" column="0">
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>1</number>
+       <number>10</number>
       </property>
       <widget class="QWidget" name="cars">
        <attribute name="title">
@@ -331,6 +331,24 @@
        <layout class="QGridLayout" name="gridLayout_11">
         <item row="0" column="0">
          <widget class="QTableWidget" name="tblChargSt">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>40</horstretch>
+            <verstretch>15</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>15</width>
+            <height>10</height>
+           </size>
+          </property>
+          <property name="sizeAdjustPolicy">
+           <enum>QAbstractScrollArea::AdjustToContentsOnFirstShow</enum>
+          </property>
+          <attribute name="horizontalHeaderCascadingSectionResizes">
+           <bool>false</bool>
+          </attribute>
           <column>
            <property name="text">
             <string>UID</string>
@@ -387,6 +405,11 @@
             <string>Charging time</string>
            </property>
           </column>
+          <column>
+           <property name="text">
+            <string>Charging cost</string>
+           </property>
+          </column>
          </widget>
         </item>
        </layout>
@@ -397,70 +420,70 @@
        </attribute>
        <layout class="QHBoxLayout" name="horizontalLayout">
         <item>
-         <widget class="QPushButton" name="pushButton">
+         <widget class="QPushButton" name="btnQ1">
           <property name="text">
            <string>Query 1</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="pushButton_2">
+         <widget class="QPushButton" name="btnQ2">
           <property name="text">
            <string>Query 2</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="pushButton_3">
+         <widget class="QPushButton" name="btnQ3">
           <property name="text">
            <string>Query 3</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="pushButton_4">
+         <widget class="QPushButton" name="btnQ4">
           <property name="text">
            <string>Query 4</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="pushButton_5">
+         <widget class="QPushButton" name="btnQ5">
           <property name="text">
            <string>Query 5</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="pushButton_6">
+         <widget class="QPushButton" name="btnQ6">
           <property name="text">
            <string>Query 6</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="pushButton_7">
+         <widget class="QPushButton" name="btnQ7">
           <property name="text">
            <string>Query 7</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="pushButton_8">
+         <widget class="QPushButton" name="btnQ8">
           <property name="text">
            <string>Query 8</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="pushButton_9">
+         <widget class="QPushButton" name="btnQ9">
           <property name="text">
            <string>Query 9</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="pushButton_10">
+         <widget class="QPushButton" name="btnQ10">
           <property name="text">
            <string>Query 10</string>
           </property>

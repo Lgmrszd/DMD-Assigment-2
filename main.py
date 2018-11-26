@@ -3,7 +3,9 @@ from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QTableWidgetItem, QHeaderView
 
 import gui  # Это наш конвертированный файл дизайна
+import query1
 import db_backend as db
+
 
 
 class ExampleApp(QtWidgets.QMainWindow, gui.Ui_MainWindow):
@@ -13,30 +15,6 @@ class ExampleApp(QtWidgets.QMainWindow, gui.Ui_MainWindow):
         # и т.д. в файле gui.py
         super().__init__()
         self.setupUi(self)  # Это нужно для инициализации нашего дизайна
-        self.tblChargSt.horizontalHeader().sectionResizeMode(QHeaderView.ResizeToContents)
-        self.tblChargSt.verticalHeader().sectionResizeMode(QHeaderView.ResizeToContents)
-        self.tblCars.horizontalHeader().sectionResizeMode(QHeaderView.ResizeToContents)
-        self.tblCars.verticalHeader().sectionResizeMode(QHeaderView.ResizeToContents)
-        self.tblCustomers.horizontalHeader().sectionResizeMode(QHeaderView.ResizeToContents)
-        self.tblCustomers.verticalHeader().sectionResizeMode(QHeaderView.ResizeToContents)
-        self.tblOrders.horizontalHeader().sectionResizeMode(QHeaderView.ResizeToContents)
-        self.tblOrders.verticalHeader().sectionResizeMode(QHeaderView.ResizeToContents)
-        self.tblPayment.horizontalHeader().sectionResizeMode(QHeaderView.ResizeToContents)
-        self.tblPayment.verticalHeader().sectionResizeMode(QHeaderView.ResizeToContents)
-        self.tblWorkshop.horizontalHeader().sectionResizeMode(QHeaderView.ResizeToContents)
-        self.tblWorkshop.verticalHeader().sectionResizeMode(QHeaderView.ResizeToContents)
-        self.tblParts.horizontalHeader().sectionResizeMode(QHeaderView.ResizeToContents)
-        self.tblParts.verticalHeader().sectionResizeMode(QHeaderView.ResizeToContents)
-        self.tblProviders.horizontalHeader().sectionResizeMode(QHeaderView.ResizeToContents)
-        self.tblProviders.verticalHeader().sectionResizeMode(QHeaderView.ResizeToContents)
-        self.tblDetails.horizontalHeader().sectionResizeMode(QHeaderView.ResizeToContents)
-        self.tblDetails.verticalHeader().sectionResizeMode(QHeaderView.ResizeToContents)
-        self.tblRepairs.horizontalHeader().sectionResizeMode(QHeaderView.ResizeToContents)
-        self.tblRepairs.verticalHeader().sectionResizeMode(QHeaderView.ResizeToContents)
-        self.tblChargSt.horizontalHeader().sectionResizeMode(QHeaderView.ResizeToContents)
-        self.tblChargSt.verticalHeader().sectionResizeMode(QHeaderView.ResizeToContents)
-        self.tblCharges.horizontalHeader().sectionResizeMode(QHeaderView.ResizeToContents)
-        self.tblCharges.verticalHeader().sectionResizeMode(QHeaderView.ResizeToContents)
         self.init_cars()
         self.init_customers()
         self.init_orders()
@@ -48,6 +26,24 @@ class ExampleApp(QtWidgets.QMainWindow, gui.Ui_MainWindow):
         self.init_repairs()
         self.init_charging_station()
         self.init_charges()
+        self.tblChargSt.resizeColumnsToContents()
+        self.tblCars.resizeColumnsToContents()
+        self.tblCustomers.resizeColumnsToContents()
+        self.tblOrders.resizeColumnsToContents()
+        self.tblPayment.resizeColumnsToContents()
+        self.tblWorkshop.resizeColumnsToContents()
+        self.tblParts.resizeColumnsToContents()
+        self.tblProviders.resizeColumnsToContents()
+        self.tblDetails.resizeColumnsToContents()
+        self.tblRepairs.resizeColumnsToContents()
+        self.tblChargSt.resizeColumnsToContents()
+        self.tblChargSt.resizeRowsToContents()
+        self.tblCharges.resizeColumnsToContents()
+        self.btnQ1.clicked.connect(self.show_query_1)
+
+    def show_query_1(self):
+        self.q1 = Query1()
+        self.q1.show()
 
     def init_cars(self):
         ans = db.cars_select()
@@ -122,7 +118,7 @@ class ExampleApp(QtWidgets.QMainWindow, gui.Ui_MainWindow):
                     table = QtWidgets.QTableWidget()
                     table.setRowCount(len(value))
                     table.setColumnCount(2)
-                    for k, smth  in enumerate(value):
+                    for k, smth in enumerate(value):
                         smth = smth.split("-")
                         table.setItem(k, 0, QTableWidgetItem(smth[0]))
                         table.setItem(k, 1, QTableWidgetItem(smth[1]))
@@ -130,7 +126,7 @@ class ExampleApp(QtWidgets.QMainWindow, gui.Ui_MainWindow):
 
                 else:
                     self.tblChargSt.setItem(i, j, QTableWidgetItem(str(value)))
-        #table.verticalHeader().setStretchLastSection(True)
+        table.verticalHeader().setStretchLastSection(True)
 
     def init_charges(self):
         ans = db.charges_select()
@@ -138,6 +134,16 @@ class ExampleApp(QtWidgets.QMainWindow, gui.Ui_MainWindow):
         for i, row in enumerate(ans):
             for j, value in enumerate(row):
                 self.tblCharges.setItem(i, j, QTableWidgetItem(str(value)))
+
+
+class Query1(QtWidgets.QMainWindow, query1.Ui_MainWindow):
+
+    def __init__(self):
+        # Это здесь нужно для доступа к переменным, методам
+        # и т.д. в файле query1.py
+        super().__init__()
+        self.setWindowTitle('Query 1')
+        self.setupUi(self)  # Это нужно для инициализации нашего дизайна
 
 
 def main():
