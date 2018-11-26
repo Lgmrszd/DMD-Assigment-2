@@ -3,7 +3,7 @@ import random
 __plate_formats = [(("L", 4), ("-",), ("d", 3)), (("L", 3), ("-",), ("d", 4))]
 __colors = ["Red", "Green", "Blue", "Magenta", "Yellow", "Silver", "Gray", "White", "Black"]
 __models = [("Toyota Prius", "Type 1"), ("Tesla Model S", "Tesla Supercharger"),
-            ("Tesla Model 3", "Tesla Supercharger"), ("KAMAZ", "GOST 23784"), ("Waymo"), ("ICar", "Lighting"),
+            ("Tesla Model 3", "Tesla Supercharger"), ("KAMAZ", "GOST 23784"), ("Waymo", "Type 2"), ("ICar", "Lighting"),
             ("Ford Japan", "CHAdeMO")]
 
 

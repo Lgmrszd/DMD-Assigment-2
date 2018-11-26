@@ -29,6 +29,10 @@ def _insertion(sql_statement, data):
 
 
 def create_test_data():
+    sql_statement = "INSERT INTO CAR_TYPES (MODEL,PLUG_TYPE) VALUES (?, ?);"
+    car_types = test_data.car_types()
+    _insertion(sql_statement, car_types)
+
     sql_statement = "INSERT INTO CARS(CAR_ID, COLOR, MODEL) VALUES (?, ?, ?)"
     cars = [test_data.random_car() for i in range(20)]
     _insertion(sql_statement, cars)
