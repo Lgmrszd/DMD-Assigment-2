@@ -306,3 +306,12 @@ def query7():
                      "    SELECT COUNT(*) FROM cars\n"
                      "));")
     return _selection(sql_statement)
+
+
+def query8():
+    sql_statement = ("SELECT username, count(distinct C.datetime)\n"
+                     "FROM orders O, charges C\n"
+                     "WHERE date(O.datetime) = date(C.datetime)\n"
+                     "GROUP BY username;")
+    return _selection(sql_statement)
+
