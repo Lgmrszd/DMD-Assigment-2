@@ -10,6 +10,16 @@ def create_tables():
     conn.commit()
 
 
+def clear_tables():
+    tables = ['PAYMENTS', 'CHARGES', 'ORDERS', 'REPAIRS', 'AVAILABLE_PARTS', 'PARTS_FOR', 'SOCKETS',
+              'CHARGING_STATIONS', 'CUSTOMERS', 'CARS', 'CAR_TYPES', 'WORKSHOPS', 'CAR_PARTS', 'PARTS_PROVIDERS']
+    cur = conn.cursor()
+    for table in tables:
+        cur.execute("DELETE FROM {}".format(table))
+    conn.commit()
+    cur.close()
+
+
 def _selection(sql_statement):
     cur = conn.cursor()
     cur.execute(sql_statement)
@@ -29,11 +39,19 @@ def _insertion(sql_statement, data):
 
 
 def create_test_data():
-    sql_statement = "INSERT INTO CAR_TYPES (MODEL,PLUG_TYPE) VALUES (?, ?);"
+    sql_statement = "INSERT INTO `CAR_TYPES` (MODEL,PLUG_TYPE) VALUES (?, ?);"
     car_types = test_data.car_types()
     _insertion(sql_statement, car_types)
 
-    sql_statement = "INSERT INTO CARS(CAR_ID, COLOR, MODEL) VALUES (?, ?, ?)"
+    sql_statement = "INSERT INTO `CAR_PARTS` (NAME) VALUES (?);"
+    parts = test_data.parts()
+    _insertion(sql_statement, parts)
+
+    sql_statement = "INSERT INTO `PARTS_FOR` (NAME,MODEL) VALUES (?, ?);"
+    parts_for = test_data.parts_for()
+    _insertion(sql_statement, parts_for)
+
+    sql_statement = "INSERT INTO `CARS` (CAR_ID, COLOR, MODEL) VALUES (?, ?, ?)"
     cars = [test_data.random_car() for i in range(20)]
     _insertion(sql_statement, cars)
 
