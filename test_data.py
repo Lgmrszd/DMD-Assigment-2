@@ -1,10 +1,13 @@
 import random
 
+
+__ch_count = 12
 __plate_formats = [(("L", 4), ("-",), ("d", 3)), (("L", 3), ("-",), ("d", 4))]
 __colors = ["Red", "Green", "Blue", "Magenta", "Yellow", "Silver", "Gray", "White", "Black"]
 __models = [("Toyota Prius", "Type 1"), ("Tesla Model S", "Tesla Supercharger"),
             ("Tesla Model 3", "Tesla Supercharger"), ("KAMAZ", "GOST 23784"), ("Waymo", "Type 2"), ("ICar", "Lighting"),
             ("Ford Japan", "CHAdeMO")]
+__plug_types = ["Type 1", "Type 2", "Tesla Supercharger", "GOST 23784", "CHAdeMO", "Lighting"]
 __parts_for = [("Tesla Supercharger Connector", "Tesla Model 3"), ("Tesla Supercharger Connector", "Tesla Model S"),
                ("ICar Engine", "ICar"),
                ("Lidar T1", "KAMAZ"), ("Lidar T1", "Toyota Prius"),
@@ -50,6 +53,12 @@ def charging_stations():
     return stations_list
 
 
+def sockets():
+    for uid in range(1,):
+        for plug in __plug_types:
+            pass
+
+
 def parts():
     return [(j,) for j in set([i[0] for i in __parts_for])]
 
@@ -72,10 +81,6 @@ def workshops():
 
 def customers():
     return __customers
-
-
-def parts():
-    return [(j,) for j in set([i[0] for i in __parts_for])]
 
 
 def random_car_plate_number():

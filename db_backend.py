@@ -80,6 +80,8 @@ def create_test_data():
     charging_stations = test_data.charging_stations()
     _insertion(sql_statement, charging_stations)
 
+    # sql_statement = "INSERT INTO `SOCKETS` (UID,PLUG_TYPE,NUMBER) VALUES (?, ?, ?);"
+
 
 def cars_select():
     sql_statement = "select C.CAR_ID, C.MODEL, T.PLUG_TYPE, C.COLOR from CARS C, CAR_TYPES T where C.MODEL = T.MODEL;"
@@ -162,7 +164,7 @@ def query2(date):
                      "(\n"
                      "    SELECT time(strftime('%s', datetime) - 60*strftime('%M', datetime), 'unixepoch') as time\n"
                      "    FROM charges\n"
-                     "    WHERE date(datetime) LIKE '?'\n"
+                     "    WHERE date(datetime) LIKE ?\n"
                      ") ON a = CAST(strftime('%H', time) AS INTEGER)\n"
                      "GROUP BY a;")
     return _selection(sql_statement, (date,))
@@ -184,14 +186,14 @@ def query5(date):
                      "    SELECT car_id, sum(traveled_to_client) as trav, "
                      "sum(strftime('%s', duration)) as sec, count(*) as c\n"
                      "    FROM orders\n"
-                     "    WHERE date(datetime) like '?'\n"
+                     "    WHERE date(datetime) like ?\n"
                      "    GROUP BY car_id\n"
                      ");")
     return _selection(sql_statement, (date,))
 
 
 def query7():
-    sql_statement = ("SELECT C.car_id, O.car_id\n"
+    sql_statement = ("SELECT C.car_id\n"
                      "FROM cars C\n"
                      "LEFT JOIN\n"
                      "(\n"
