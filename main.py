@@ -325,6 +325,16 @@ class Query8(QtWidgets.QMainWindow, query8.Ui_MainWindow):
         super().__init__()
         self.setWindowTitle('Query 8')
         self.setupUi(self)
+        self.pushButton.clicked.connect(self.search)
+
+    def search(self):
+        ans = db.query8(self.lineEdit.text())
+        self.tableWidget.setRowCount(len(ans))
+        for i, row in enumerate(ans):
+            for j, value in enumerate(row):
+                self.tableWidget.setItem(i, j, QTableWidgetItem(str(value)))
+        self.tableWidget.resizeRowsToContents()
+        self.tableWidget.resizeColumnsToContents()
 
 
 class Query9(QtWidgets.QMainWindow, query9.Ui_MainWindow):
@@ -341,6 +351,8 @@ class Query10(QtWidgets.QMainWindow, query10.Ui_MainWindow):
         super().__init__()
         self.setWindowTitle('Query 10')
         self.setupUi(self)
+        val = db.query10()
+        self.textBrowser.append(str(val[0][0]))
 
 
 def main():
